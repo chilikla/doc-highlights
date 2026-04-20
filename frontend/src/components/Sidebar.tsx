@@ -32,11 +32,11 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
     <aside className="w-64 shrink-0 flex flex-col gap-5 p-5 border-r border-slate-700 bg-slate-900/60 min-h-screen">
       <div>
         <h1 className="text-lg font-bold text-slate-100 mb-1">הדגשות מסמך</h1>
-        <p className="text-xs text-slate-400">טען קובץ Word להצגת ההדגשות</p>
+        <p className="text-xs text-slate-400">טעני קובץ Word להצגת ההדגשות</p>
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-slate-300">בחר קובץ</span>
+        <span className="text-sm font-medium text-slate-300">בחרי קובץ</span>
         <input
           ref={inputRef}
           type="file"
@@ -52,7 +52,7 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
           {fileName ? (
             <span className="truncate block" title={fileName}>{fileName}</span>
           ) : (
-            "בחר קובץ .docx"
+            "בחרי קובץ .docx"
           )}
         </button>
 
@@ -63,7 +63,7 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
 
       {highlights.length > 0 && (
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-slate-300">סנן לפי צבע</span>
+          <span className="text-sm font-medium text-slate-300">סנני לפי צבע</span>
           <select
             value={selectedColor}
             onChange={(e) => onColorChange(e.target.value)}

@@ -12,8 +12,8 @@ export function HighlightList({ highlights, loaded }: Props) {
       <div className="flex-1 flex items-center justify-center p-12">
         <div className="text-center text-slate-500">
           <div className="text-5xl mb-4">📄</div>
-          <p className="text-lg font-medium text-slate-400">טען קובץ Word</p>
-          <p className="text-sm mt-1">בחר קובץ .docx עם הדגשות כדי להתחיל</p>
+          <p className="text-lg font-medium text-slate-400">טעני קובץ Word</p>
+          <p className="text-sm mt-1">בחרי קובץ docx. עם הדגשות כדי להתחיל</p>
         </div>
       </div>
     );
@@ -25,7 +25,7 @@ export function HighlightList({ highlights, loaded }: Props) {
         <div className="text-center text-slate-500">
           <div className="text-5xl mb-4">🔍</div>
           <p className="text-lg font-medium text-slate-400">לא נמצאו הדגשות</p>
-          <p className="text-sm mt-1">נסה לבחור צבע אחר או טען מסמך אחר</p>
+          <p className="text-sm mt-1">נסי לבחור צבע אחר או טעני מסמך אחר</p>
         </div>
       </div>
     );
