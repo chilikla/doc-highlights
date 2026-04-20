@@ -66,7 +66,10 @@ async def upload(file: UploadFile = File(...)):
 if DIST_DIR.exists():
     app.mount("/assets", StaticFiles(directory=DIST_DIR / "assets"), name="assets")
 
+    @app.get("/favicon.png")
+    async def favicon():
+        return FileResponse(DIST_DIR / "favicon.png")
+
     @app.get("/{full_path:path}")
     async def spa(full_path: str):
-        index = DIST_DIR / "index.html"
-        return FileResponse(index)
+        return FileResponse(DIST_DIR / "index.html")
