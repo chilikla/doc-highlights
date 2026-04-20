@@ -13,7 +13,7 @@ export function HighlightList({ highlights, loaded }: Props) {
         <div className="text-center text-slate-500">
           <div className="text-5xl mb-4">📄</div>
           <p className="text-lg font-medium text-slate-400">טעני קובץ Word</p>
-          <p className="text-sm mt-1">בחרי קובץ docx. עם הדגשות כדי להתחיל</p>
+          <p className="text-sm mt-1">בחרי קובץ docx. עם הארות כדי להתחיל</p>
         </div>
       </div>
     );
@@ -24,7 +24,7 @@ export function HighlightList({ highlights, loaded }: Props) {
       <div className="flex-1 flex items-center justify-center p-12">
         <div className="text-center text-slate-500">
           <div className="text-5xl mb-4">🔍</div>
-          <p className="text-lg font-medium text-slate-400">לא נמצאו הדגשות</p>
+          <p className="text-lg font-medium text-slate-400">לא נמצאו הארות</p>
           <p className="text-sm mt-1">נסי לבחור צבע אחר או טעני מסמך אחר</p>
         </div>
       </div>
@@ -34,7 +34,7 @@ export function HighlightList({ highlights, loaded }: Props) {
   return (
     <div className="flex-1 p-6 overflow-y-auto">
       <p className="text-xs text-slate-500 mb-4 text-right">
-        {highlights.length} הדגשות
+        {highlights.length} הארות
       </p>
       <div className="flex flex-col gap-3">
         {highlights.map((h, i) => {

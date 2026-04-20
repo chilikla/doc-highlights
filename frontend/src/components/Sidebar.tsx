@@ -31,8 +31,8 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
   return (
     <aside className="w-64 shrink-0 flex flex-col gap-5 p-5 border-r border-slate-700 bg-slate-900/60 min-h-screen">
       <div>
-        <h1 className="text-lg font-bold text-slate-100 mb-1">הדגשות מסמך</h1>
-        <p className="text-xs text-slate-400">טעני קובץ Word להצגת ההדגשות</p>
+        <h1 className="text-lg font-bold text-slate-100 mb-1">הארות</h1>
+        <p className="text-xs text-slate-400">טעני קובץ Word להצגת ההארות</p>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -52,12 +52,12 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
           {fileName ? (
             <span className="truncate block" title={fileName}>{fileName}</span>
           ) : (
-            "בחרי קובץ .docx"
+            "בחרי קובץ docx."
           )}
         </button>
 
         {loading && (
-          <p className="text-xs text-slate-400 text-right">טוען הדגשות...</p>
+          <p className="text-xs text-slate-400 text-right">טוען הארות...</p>
         )}
       </div>
 
@@ -102,6 +102,9 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
           </div>
         </div>
       )}
+      <div className="mt-auto pt-4 border-t border-slate-700">
+        <p className="text-md font-bold text-slate-500 text-right">עינה מרקר</p>
+      </div>
     </aside>
   );
 }
