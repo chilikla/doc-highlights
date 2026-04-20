@@ -33,7 +33,7 @@ export function HighlightList({ highlights, loaded }: Props) {
 
   return (
     <div className="flex-1 p-6 overflow-y-auto">
-      <p className="text-xs text-slate-500 mb-4 text-right">
+      <p className="text-xs text-slate-500 mb-4">
         {highlights.length} הארות
       </p>
       <div className="flex flex-col gap-3">
@@ -42,12 +42,13 @@ export function HighlightList({ highlights, loaded }: Props) {
           return (
             <div
               key={i}
-              className="rounded-lg px-4 py-3 text-right text-slate-200 text-sm leading-relaxed border border-slate-700 bg-slate-800/50"
+              dir="auto"
+              className="rounded-lg px-4 py-3 text-slate-900 text-sm leading-relaxed border border-slate-200 bg-white"
               style={{ borderRightWidth: "4px", borderRightColor: info.hex }}
             >
               <span
                 className="inline-block rounded px-1 -mx-1"
-                style={{ backgroundColor: info.hex + "26" }}
+                style={{ backgroundColor: info.hex + "66" }}
               >
                 {h.text}
               </span>

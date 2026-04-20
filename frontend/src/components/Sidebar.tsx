@@ -13,7 +13,6 @@ interface Props {
 
 export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highlights, fileName }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const pendingFile = useRef<File | null>(null);
 
   const uniqueColors = [...new Set(highlights.map((h) => h.color))].sort((a, b) => {
     const order = Object.keys(COLOR_MAP);
@@ -23,13 +22,13 @@ export function Sidebar({ onUpload, loading, selectedColor, onColorChange, highl
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      pendingFile.current = file;
       onUpload(file);
+      e.target.value = "";
     }
   }
 
   return (
-    <aside className="w-64 shrink-0 flex flex-col gap-5 p-5 border-r border-slate-700 bg-slate-900/60 min-h-screen">
+    <aside dir="rtl" className="w-64 shrink-0 flex flex-col gap-5 p-5 border-r border-slate-700 bg-slate-900/60 min-h-screen">
       <div>
         <h1 className="text-lg font-bold text-slate-100 mb-1">הארות</h1>
         <p className="text-xs text-slate-400">טעני קובץ Word להצגת ההארות</p>

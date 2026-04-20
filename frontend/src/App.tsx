@@ -43,7 +43,7 @@ export default function App() {
     : highlights;
 
   return (
-    <div dir="rtl" className="min-h-screen flex flex-row bg-slate-950 text-slate-100">
+    <div className="min-h-screen flex flex-row bg-slate-950 text-slate-100">
       <Sidebar
         onUpload={handleUpload}
         loading={loading}
