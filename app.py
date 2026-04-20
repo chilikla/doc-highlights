@@ -1,5 +1,7 @@
+import re
 import tempfile
 import os
+from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -12,12 +14,49 @@ app = FastAPI()
 
 DIST_DIR = Path(__file__).parent / "frontend" / "dist"
 
+_DATE_RE = re.compile(r'^(\d{1,2})[./](\d{1,2})(?:[./](\d{2,4}))?')
+_NOTE_RE = re.compile(r'\[(.+)\]')
+
+
+def _parse_date_line(text: str, prev_year: int | None) -> tuple[date | None, str | None]:
+    m = _DATE_RE.match(text.strip())
+    if not m:
+        return None, None
+    day, month = int(m.group(1)), int(m.group(2))
+    year_str = m.group(3)
+    if year_str:
+        year = int(year_str)
+        if year < 100:
+            year += 1900
+    elif prev_year is not None:
+        year = prev_year
+    else:
+        return None, None
+    note_m = _NOTE_RE.search(text)
+    note = note_m.group(1) if note_m else None
+    try:
+        return date(year, month, day), note
+    except ValueError:
+        return None, None
+
 
 def extract_highlights(path: str) -> list[dict]:
     doc = Document(path)
     highlights = []
+    current_date: date | None = None
+    current_note: str | None = None
+    prev_year: int | None = None
 
     for para_idx, paragraph in enumerate(doc.paragraphs):
+        text = paragraph.text.strip()
+
+        parsed, note = _parse_date_line(text, prev_year)
+        if parsed is not None:
+            current_date = parsed
+            current_note = note
+            prev_year = parsed.year
+            continue
+
         current_color: str | None = None
         current_text = ""
 
@@ -29,17 +68,35 @@ def extract_highlights(path: str) -> list[dict]:
                     current_text += run.text
                 else:
                     if current_text and current_color:
-                        highlights.append({"text": current_text, "color": current_color, "para_index": para_idx})
+                        highlights.append({
+                            "text": current_text,
+                            "color": current_color,
+                            "para_index": para_idx,
+                            "date": current_date.isoformat() if current_date else None,
+                            "date_note": current_note,
+                        })
                     current_color = color_name
                     current_text = run.text
             else:
                 if current_text and current_color:
-                    highlights.append({"text": current_text, "color": current_color, "para_index": para_idx})
+                    highlights.append({
+                        "text": current_text,
+                        "color": current_color,
+                        "para_index": para_idx,
+                        "date": current_date.isoformat() if current_date else None,
+                        "date_note": current_note,
+                    })
                 current_color = None
                 current_text = ""
 
         if current_text and current_color:
-            highlights.append({"text": current_text, "color": current_color, "para_index": para_idx})
+            highlights.append({
+                "text": current_text,
+                "color": current_color,
+                "para_index": para_idx,
+                "date": current_date.isoformat() if current_date else None,
+                "date_note": current_note,
+            })
 
     return highlights
 
