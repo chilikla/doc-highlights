@@ -1,0 +1,13 @@
+services:
+  doc-highlights:
+    build: .
+    image: doc-highlights
+    container_name: doc-highlights
+    restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: new-bridge
