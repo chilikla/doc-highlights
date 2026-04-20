@@ -1,5 +1,5 @@
 import type { Highlight } from "../types";
-import { getColor } from "../colors";
+import { getColor, getTextColor } from "../colors";
 
 interface Props {
   highlights: Highlight[];
@@ -48,7 +48,7 @@ export function HighlightList({ highlights, loaded }: Props) {
             >
               <span
                 className="inline-block rounded px-1 -mx-1"
-                style={{ backgroundColor: info.hex + "66" }}
+                style={{ backgroundColor: info.hex, color: getTextColor(info.hex) }}
               >
                 {h.text}
               </span>

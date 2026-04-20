@@ -23,3 +23,11 @@ export const COLOR_MAP: Record<string, ColorInfo> = {
 export function getColor(name: string): ColorInfo {
   return COLOR_MAP[name] ?? { hex: "#94a3b8", label: name };
 }
+
+export function getTextColor(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.5 ? "#000000" : "#ffffff";
+}
