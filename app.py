@@ -1,12 +1,16 @@
 import re
 import tempfile
 import os
+import logging
 from datetime import date
 from pathlib import Path
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, Request, UploadFile, File, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+logger = logging.getLogger(__name__)
 from docx import Document
 from docx.enum.text import WD_COLOR_INDEX
 
@@ -128,5 +132,6 @@ if DIST_DIR.exists():
         return FileResponse(DIST_DIR / "favicon.png")
 
     @app.get("/{full_path:path}")
-    async def spa(full_path: str):
+    async def spa(request: Request, full_path: str):
+        logger.info("New visit from %s", request.client.host)
         return FileResponse(DIST_DIR / "index.html")
