@@ -5,7 +5,11 @@ services:
     container_name: doc-highlights
     restart: unless-stopped
     networks:
-      - web
+      # MAC pinned so arcane's nightly auto-update cannot leave this container
+      # with a stale MAC that collides with another container's. Range map is
+      # documented in /home/chilikla/config/stacks/base/docker-compose.yml.
+      web:
+        mac_address: 02:42:ac:13:f2:04
 
 networks:
   web:
